@@ -9,14 +9,16 @@
 
 
 .activeTour {
-    position: relative !important;
-    z-index: 1004 !important;
-    background-color: #fff !important;
+    display: block;
+    position: relative;
+    z-index: 1004;
+    background-color: #fff;
     border-radius: 8px;
     height: fit-content;
     pointer-events: none;
-    animation: beautiful .4s ease-in-out;
+    animation: beautiful .4s linear;
 }
+
 @keyframes beautiful {
     from {
         opacity: .1;
@@ -26,66 +28,61 @@
         opacity: 1;
     }
 }
+
 .right,
 .left,
 .top,
-.bottom {
+.bottom,
+.topSticky {
+    pointer-events: all;
     position: absolute;
     color: #FFF;
-    background-color: #6938EF;
+    background-color: #EB9F52;
+    font-size: 20px;
     border-radius: 8px;
-    max-width: 310px;
-    z-index: 1004;
-    padding: 16px 12px 12px 12px;
+    width: 310px;
+    z-index: 1005;
+    padding: 16px 12px 16px 12px;
 
 }
+
+.right {
+    right: 0;
+    top: 0;
+    transform: translateX(105%);
+}
+
+.left {
+    left: 0;
+    top: 0;
+    transform: translateX(-105%);
+}
+
+.bottom {
+    bottom: 0;
+    right: 50%;
+    transform: translate(50%, 110%);
+}
+
+.top {
+    bottom: -20px;
+    transform: translateY(-110%);
+}
+
+.topSticky {
+    position: fixed;
+    /* transform: translateY(105%); */
+}
+
 
 .animationToolTip {
     animation: fadeIn .8s ease-in-out;
 }
 
-.right::after {
-    content: "";
-    border-color: #6938EF transparent transparent transparent;
-    border-style: solid;
-    border-width: 15px;
-    width: 0;
-    height: 0;
-    position: absolute;
-    transform: rotate(90deg);
-    top: 15px;
-    left: -28px;
-}
 
-.left::after {
-    content: "";
-    border-color: #6938EF transparent transparent transparent;
-    border-style: solid;
-    border-width: 15px;
-    width: 0;
-    height: 0;
+.arrow {
     position: absolute;
-    transform: rotate(-90deg);
-    top: 15px;
-    right: -28px;
-}
-
-.top::after {
-    content: "";
-    border-color: #6938EF transparent transparent transparent;
-    border-style: solid;
-    border-width: 15px;
-    width: 0;
-    height: 0;
-    position: absolute;
-    transform: translateX(50%);
-    right: 50%;
-    bottom: -28px;
-}
-
-.bottom::after {
-    content: "";
-    border-color: #6938EF transparent transparent transparent;
+    border-color: #EB9F52 transparent transparent transparent;
     border-style: solid;
     border-width: 15px;
     width: 0;
@@ -109,23 +106,24 @@
 .back {
     color: #FFF;
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
+    font-family: ggsr;
 }
 
 .next {
     display: inline-flex;
-    height: 32px;
-    padding: 0px 20px;
+    padding: 10px 16px;
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    border-radius: 30px;
+    border-radius: 10px;
     background: #FFF;
-    color: #6938EF;
+    color: #EB9F52;
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
+    font-family: ggsr;
+    width: 111px;
 }
 
 .groupButton {
@@ -162,13 +160,35 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: 8px;
 }
 
-@media only screen and (max-width: 420px) {
+.stepActive {
+    font-size: 16px;
+}
+
+.linerProgress {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    /* z-index: -1; */
+}
+
+.wrapper {
+    position: absolute;
+    width: 100%;
+    height: 8px;
+    overflow: hidden;
+    background-color: #D9D9D9;
+    bottom: -2px;
+    right: 0;
+    border-radius: 0 0 5px 5px;
+
+}
+
+@media only screen and (max-width: 450px) {
     .activeTour {
-
         border-radius: 0;
-
     }
 
     .closeButton {
@@ -184,5 +204,29 @@
         font-size: 14px;
         font-weight: 500;
 
+    }
+
+    .back {
+        font-size: 14px;
+    }
+
+    .next {
+        font-size: 14px;
+    }
+
+    .right,
+    .left,
+    .top,
+    .bottom,
+    .topSticky {
+        font-size: 16px;
+    }
+
+    .modal>* {
+        font-family: ggsr;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
 }
